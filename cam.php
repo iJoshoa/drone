@@ -10,7 +10,7 @@ echo $_SERVER['SERVER_ADDR'];
 
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css" />
         <link href="static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="static/style.css" rel="stylesheet" type="text/css" />
+        <link href="static/style.css" rel="stylesheet" type="text/css" /> 
     <style>
 	body{
 		background-color: #808080;
@@ -39,13 +39,12 @@ echo $_SERVER['SERVER_ADDR'];
 		<div class="col-4 col-md-4">
 			<div class="align-self-center">
 			<form action="http://192.168.1.158/b2j.php" method="post">
-				<button onclick="get()" type="button" class="btn btn-success">Capture</button>
-				<input type="text" id="pic">
-				<input onclick="get()" name="sent" type="submit" id="pic_c" class="btn btn-success">
+				<input type="hidden" name="sent" id="pic_c">
+				<input onclick="get()" style="width: 150px;" type="image" src="static/img/icon_p.png" alt="Submit"  value="Capture">
 			</form>
-			<div class="form-floating">
-  <textarea class="form-control" placeholder="Leave a comment here" id="pic"></textarea>
-  <label for="floatingTextarea">Comments</label>
+<div class="form-floating">
+<textarea class="form-control" placeholder="Leave a comment here" id="pic" style="display:none;"></textarea>
+  <label for="floatingTextarea" style="display:none;">Comments</label>
 </div>
 			</div>
 		</div>
@@ -60,7 +59,7 @@ echo $_SERVER['SERVER_ADDR'];
             client.connect({{port}});
 	function get(){
 		document.getElementById("pic_c").value = g_pic;
-        	return document.getElementById("pic").innerHTML = g_pic;
+        	//return document.getElementById("pic").innerHTML = g_pic;
 	}
         </script>
     </body>

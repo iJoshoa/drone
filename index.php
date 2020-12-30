@@ -1,18 +1,17 @@
 <?php
-$output = shell_exec('ls -lart');
-echo "<pre>$output</pre>";
-echo $_SERVER['SERVER_ADDR'];echo ":8000";
+#$output = shell_exec('ls -lart');
+#echo "<pre>$output</pre>";
+#echo $_SERVER['SERVER_ADDR'];echo ":8000";
 ?>
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <!-- Bootstrap CSS
+    <!-- Bootstrap CSS -->
     <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 	<META HTTP-EQUIV="Refresh" CONTENT="0;URL='http://<?php echo $_SERVER['SERVER_ADDR'];echo ":8000"; ?>'">
--->
         <title>Mini UAV for Indoor Surveillance</title>
 
         <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesh$
@@ -26,7 +25,7 @@ echo $_SERVER['SERVER_ADDR'];echo ":8000";
     <div class="col-sm">
     </div>
     <div class="col-sm">
-<img id="video"></img>sdfsdfsd
+<img id="video"></img>
     </div>
     <div class="col-sm">
     </div>

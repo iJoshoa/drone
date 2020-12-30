@@ -11,8 +11,8 @@ var client = {
     // Connects to Pi via websocket
     connect: function (port) {
         var self = this, video = document.getElementById("video");
-	var pic = document.getElementById("pic");
-	document.getElementById("pic").innerHTML="";
+	//var pic = document.getElementById("pic");
+	//document.getElementById("pic").innerHTML="";
         this.socket = new WebSocket("ws://" + window.location.hostname + ":" + port + "/websocket");
 
         // Request the video stream once connected
