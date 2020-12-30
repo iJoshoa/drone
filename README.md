@@ -2,9 +2,6 @@ camp
 ====
 
 Another Raspberry Pi camera webserver.
-
-![](img/example.png)
-
 What it does
 ============
 
