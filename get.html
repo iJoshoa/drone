@@ -1,0 +1,125 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Dynamic sensor data</title>
+	<meta name="description" content="HC-SR04">
+	<meta name="author" content="Andrzej Włodarczyk">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<!-- css for the progess bar and slider -->
+	<link type="text/css" rel="stylesheet" href="style/slider.css"></link>
+	<link type="text/css" rel="stylesheet" href="style/progress-bar.css"></link>
+
+	<style type="text/css">
+		#slider-value{
+			font-family: sans-serif;
+			font-weight: bold;
+			font-size: 20px; 
+		}
+
+		#info{
+			font-family: sans-serif;
+			font-weight: bold;
+			font-size: 40px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+  	<div class="progress-bar">
+  		<div class="result" id ="sensor-data"></div>
+  		<div class = "progress-bar-fill" id = "bar-fill"></div>
+    </div>
+
+    <div style = "margin-top: 200px; width: 100%; text-align: center">
+    	<p id = "info"> Threshold slider </p>
+	</div>
+    <div class="slidecontainer" style = "margin-top: 50px;">
+  		<input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+	</div>
+	<div id = "slider-value"></div>
+
+
+	<!-- Progress bar javascript -->
+	<script src="js/progressbar.js" type="text/javascript"></script>
+
+	<script>
+		function set_favicon(happy) {
+	  		icon = 'img/happy.ico';
+	  		
+	  		if (!happy){
+	  			icon = 'img/angry.ico';	
+	  		}
+
+	  		var link = document.createElement('link');
+	  		var old_link = document.getElementById('favicon');
+
+	  		link.id = 'favicon';
+	  		link.rel = 'icon'; 
+	  		link.href = icon;
+
+	  		if (old_link){
+	  			document.head.removeChild(old_link);
+	  		}
+
+	  		document.head.appendChild(link);
+	  	}
+
+
+	  	bar = new ProgressBar(document.querySelector('.progress-bar'), 200);
+
+	  	var slider = document.getElementById("myRange");
+		var output = document.getElementById("slider-value");
+		output.innerHTML = "Current threshold value: " + slider.value*4 + "cm"; // Display the default slider value
+
+		// Update the current slider value (each time you drag the slider handle)
+		slider.oninput = function() {
+	    	output.innerHTML = "Current threshold value: " + this.value*4 + "cm";
+		} 
+
+
+	  	var hostname = document.location.origin;
+	  	var interval = 100;
+	  	var title = document.title;
+
+	  	
+
+	  	function get_data() {
+	  		$.ajax({
+	  			url: hostname+"/data.txt",
+			        type: "GET",
+			        dataType : "text",
+			        success: function(data){
+			        	
+			        	d = document.getElementById('sensor-data');
+				        d.innerHTML = data;
+				        bar.set_value(data);
+
+				        if (slider.value*4 > data){
+				        	document.getElementById('info').innerHTML = "Move away";
+							document.getElementById('bar-fill').style.backgroundColor = "red";
+				        	set_favicon(false);
+				        } else{
+				        	document.getElementById('info').innerHTML = "OK";
+							document.getElementById('bar-fill').style.backgroundColor = "#4CAF50";
+				        	set_favicon(true);
+				        }
+
+			        	setTimeout(function(){
+			        		get_data();
+			        	}, interval);
+			        }
+			});
+	  	}
+
+	  	get_data();
+    </script>
+</body>
+</html>

@@ -28,6 +28,7 @@ var client = {
    	    //piccode = String(video.src);
 	    //document.getElementById("pic").innerHTML = video.src;
             g_pic = messageEvent.data;
+	   // get_data();
 	};
     },
 
